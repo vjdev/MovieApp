@@ -1,21 +1,35 @@
 //
 //  ContentView.swift
-//  MovieApp
+//  MovieSample
 //
-//  Created by vijeesh k on 30/01/25.
+//  Created by vijeesh k on 28/01/25.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            ScrollView(.vertical) {
+                VStack {
+                    HeaderView()
+                    ScrollView(.horizontal) {
+                        HStack {
+                            MovieTileView()
+                            MovieTileView()
+                            MovieTileView()
+                            MovieTileView()
+                        }
+                    }
+                    HeaderView()
+                    MovieTileViewDetailed()
+                    Spacer()
+                }
+            }
+            .padding()
+            .navigationTitle("Now Showing")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .padding()
     }
 }
 

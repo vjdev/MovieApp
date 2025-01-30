@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "medium-spider-man-11-spider-man-poster-for-room-office-13-inch-x-original-imafctjenprfatgh 1.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "medium-spider-man-11-spider-man-poster-for-room-office-13-inch-x-original-imafctjenprfatgh 2.jpeg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "medium-spider-man-11-spider-man-poster-for-room-office-13-inch-x-original-imafctjenprfatgh.jpeg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
