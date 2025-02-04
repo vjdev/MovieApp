@@ -22,26 +22,26 @@ struct MovieTileView: View {
     }
 }
 
-//#Preview {
-//    MovieTileView()
-//}
-
 extension MovieTileView {
     var movieImage: some View {
         AsyncImage(url: movieImageURL) { phase in
             switch phase {
             case .empty:
-                ProgressView() // Show a loading indicator
+                ProgressView()
                     .frame(width: 100, height: 100)
             case .success(let image):
                 image.resizable()
+                    .cornerRadius(20)
                     .scaledToFit()
                     .frame(width: 200, height: 400)
+                    .cornerRadius(20)
             case .failure:
                 Image(systemName: "photo")
                     .resizable()
+                    .cornerRadius(20)
                     .scaledToFit()
                     .frame(width: 200, height: 400)
+                    
             @unknown default:
                 EmptyView()
             }
