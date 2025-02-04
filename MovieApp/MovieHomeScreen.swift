@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MovieHomeScreen.swift
 //  MovieSample
 //
 //  Created by vijeesh k on 28/01/25.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MovieHomeScreen: View {
+    var viewModel: MovieHomeScreenViewModel = MovieHomeScreenViewModel(service: MovieService())
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
@@ -29,10 +30,12 @@ struct ContentView: View {
             .padding()
             .navigationTitle("Now Showing")
             .navigationBarTitleDisplayMode(.large)
+        }.onAppear {
+            viewModel.getTrendingMovie()
         }
     }
 }
 
 #Preview {
-    ContentView()
+    MovieHomeScreen()
 }
