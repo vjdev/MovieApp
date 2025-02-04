@@ -10,22 +10,9 @@
 		C7EA61B32D4B78AB003C3A05 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C7DC2A062D512F5400D8AC38 /* Exceptions for "MovieApp" folder in "MovieApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = C7EA61B22D4B78AB003C3A05 /* MovieApp */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		C7EA61B52D4B78AB003C3A05 /* MovieApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				C7DC2A062D512F5400D8AC38 /* Exceptions for "MovieApp" folder in "MovieApp" target */,
-			);
 			path = MovieApp;
 			sourceTree = "<group>";
 		};
@@ -268,7 +255,6 @@
 				DEVELOPMENT_TEAM = MBYQRLJUG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MovieApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -298,7 +284,6 @@
 				DEVELOPMENT_TEAM = MBYQRLJUG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MovieApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

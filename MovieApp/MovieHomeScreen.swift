@@ -8,20 +8,13 @@
 import SwiftUI
 
 struct MovieHomeScreen: View {
-    var viewModel: MovieHomeScreenViewModel = MovieHomeScreenViewModel(service: MovieService())
+    @StateObject private var viewModel: MovieHomeScreenViewModel = MovieHomeScreenViewModel(service: MovieService())
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack {
                     HeaderView()
-                    ScrollView(.horizontal) {
-                        HStack {
-                            MovieTileView()
-                            MovieTileView()
-                            MovieTileView()
-                            MovieTileView()
-                        }
-                    }
+                    showHorizontalScrollingMovieTiles()
                     HeaderView()
                     MovieTileViewDetailed()
                     Spacer()
@@ -34,7 +27,22 @@ struct MovieHomeScreen: View {
             viewModel.getTrendingMovie()
         }
     }
+    
+    @ViewBuilder
+    func showHorizontalScrollingMovieTiles() -> some View {
+        if let results = viewModel.trendingMovies?.results {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(results, id: \.self) { data in
+                        MovieTileView(movieImageURL: viewModel.getMoviePoster(data))
+                    }
+                }
+            }
+        }
+    }
 }
+
+
 
 #Preview {
     MovieHomeScreen()

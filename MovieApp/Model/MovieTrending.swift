@@ -22,7 +22,7 @@ struct MovieTrending: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable, Hashable {
     let backdropPath: String?
     let id: Int?
     let title: String?

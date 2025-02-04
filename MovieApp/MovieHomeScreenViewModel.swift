@@ -30,9 +30,9 @@ final class MovieHomeScreenViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
     
-    func getMoviePoster() -> URL? {
+    func getMoviePoster(_ result: Result) -> URL? {
         var fullPath = ""
-        if let backdropPath = trendingMovies?.results?.first?.backdropPath {
+        if let backdropPath = result.posterPath {
             fullPath = ("https://image.tmdb.org/t/p/original/\(backdropPath)")
         }
         let url = URL(string: fullPath)
