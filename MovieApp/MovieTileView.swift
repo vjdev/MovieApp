@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+struct MovieTileViewDetails {
+   let movieImageURL: URL?
+   let movieTitle: String
+   let movieRating: String
+}
+
 struct MovieTileView: View {
-    init(movieImageURL: URL?) {
-        self.movieImageURL = movieImageURL
+    private let movieDetails: MovieTileViewDetails
+    
+    init(movieDetails: MovieTileViewDetails) {
+        self.movieDetails = movieDetails
     }
     
-    private let movieImageURL: URL?
     var body: some View {
         VStack(alignment: .leading) {
             movieImage
@@ -24,7 +31,7 @@ struct MovieTileView: View {
 
 extension MovieTileView {
     var movieImage: some View {
-        AsyncImage(url: movieImageURL) { phase in
+        AsyncImage(url: movieDetails.movieImageURL) { phase in
             switch phase {
             case .empty:
                 ProgressView()
@@ -49,7 +56,7 @@ extension MovieTileView {
     }
     
     var movieTitle: some View {
-        Text("Spiderman: No Way Home")
+        Text(movieDetails.movieTitle)
             .foregroundColor(.black)
             .font(.title)
             .lineLimit(0)
@@ -60,15 +67,15 @@ extension MovieTileView {
             .foregroundStyle(.yellow)
     }
     
-    var ratingVLabel: some View {
-        Text("9.1/10 IMDb")
+    var ratingLabel: some View {
+        Text(movieDetails.movieRating)
             .foregroundStyle(.gray)
             .font(.caption)
     }
     var rating: some View {
         HStack {
             starIcon
-            ratingVLabel
+            ratingLabel
         }
     }
 }

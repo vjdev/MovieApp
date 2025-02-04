@@ -34,7 +34,7 @@ struct MovieHomeScreen: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(results, id: \.self) { data in
-                        MovieTileView(movieImageURL: viewModel.getMoviePoster(data))
+                        MovieTileView(movieDetails: viewModel.getMovieDetails(data))
                     }
                 }
             }
