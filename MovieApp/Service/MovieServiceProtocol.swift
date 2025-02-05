@@ -9,5 +9,6 @@ import Foundation
 import Combine
 protocol MovieServiceProtocol {
     func trendingMovies() -> AnyPublisher<MovieTrending?, APIErrors>
+    func getMovieDetails(movieID: String) -> AnyPublisher<MovieDetails?, APIErrors>
 }
 

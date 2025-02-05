@@ -9,27 +9,26 @@
 import Foundation
 
 enum MovieServiceEndpoint: EndpointProtocol {
-    case getMovieName(searchString: String)
     case trendingMovie
+    case movieDetails(movieID: String)
     var baseURL: String {
         return "https://api.themoviedb.org/3"
     }
     
     var absoluteURL: String {
         switch self {
-        case .getMovieName:
-            return baseURL
         case .trendingMovie:
             return "\(baseURL)/trending/movie/day"
+        case .movieDetails(let movieID):
+            return "\(baseURL)/movie/\(movieID)"
         }
     }
     
     var params: [String : String] {
         switch self {
-        case let .getMovieName(searchString):
-            return ["t": searchString, "apikey": "d29d5f8"]
-        case .trendingMovie:
+        case .trendingMovie, .movieDetails:
             return ["language": "en-US"]
+            
         }
     }
     

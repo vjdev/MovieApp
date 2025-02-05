@@ -25,4 +25,17 @@ final class MovieService: MovieServiceProtocol {
             .mapError { _ in APIErrors.decodingError }
             .eraseToAnyPublisher()
     }
+    
+    func getMovieDetails(movieID: String) -> AnyPublisher<MovieDetails?, APIErrors> {
+        apiProvider.getData(from: .movieDetails(movieID: movieID))
+            .tryMap { data -> MovieDetails? in
+                do {
+                    return try JSONDecoder().decode(MovieDetails.self, from: data)
+                } catch {
+                    throw APIErrors.serverError
+                }
+            }
+            .mapError { _ in APIErrors.decodingError }
+            .eraseToAnyPublisher()
+    }
 }
