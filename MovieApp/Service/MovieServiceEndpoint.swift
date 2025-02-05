@@ -10,7 +10,7 @@ import Foundation
 
 enum MovieServiceEndpoint: EndpointProtocol {
     case trendingMovie
-    case movieDetails(movieID: String)
+    case movieDetails(movieID: Int?)
     var baseURL: String {
         return "https://api.themoviedb.org/3"
     }
@@ -20,7 +20,7 @@ enum MovieServiceEndpoint: EndpointProtocol {
         case .trendingMovie:
             return "\(baseURL)/trending/movie/day"
         case .movieDetails(let movieID):
-            return "\(baseURL)/movie/\(movieID)"
+            return "\(baseURL)/movie/\(movieID ?? 0)"
         }
     }
     

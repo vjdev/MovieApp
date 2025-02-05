@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MovieDetailView: View {
+    @StateObject private var viewModel: MovieDetailViewModel
+    init(service: MovieServiceProtocol = MovieService(), movieId: Int?) {
+        _viewModel = StateObject(wrappedValue: MovieDetailViewModel(service: service, movieID: movieId))
+    }
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
@@ -149,6 +153,6 @@ extension MovieDetailView {
     }
 }
 
-#Preview {
-    MovieDetailView()
-}
+//#Preview {
+//    MovieDetailView()
+//}

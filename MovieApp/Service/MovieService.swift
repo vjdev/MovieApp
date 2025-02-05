@@ -26,7 +26,7 @@ final class MovieService: MovieServiceProtocol {
             .eraseToAnyPublisher()
     }
     
-    func getMovieDetails(movieID: String) -> AnyPublisher<MovieDetails?, APIErrors> {
+    func getMovieDetails(movieID: Int?) -> AnyPublisher<MovieDetails?, APIErrors> {
         apiProvider.getData(from: .movieDetails(movieID: movieID))
             .tryMap { data -> MovieDetails? in
                 do {

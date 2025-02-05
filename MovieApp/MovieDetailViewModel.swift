@@ -12,8 +12,8 @@ final class MovieDetailViewModel: ObservableObject {
     private let service: MovieServiceProtocol
     private var cancellables = Set<AnyCancellable>()
     @Published private(set) var movieDetails: MovieDetails?
-    private let movieID: String
-    init(service: MovieServiceProtocol, movieID: String) {
+    private let movieID: Int?
+    init(service: MovieServiceProtocol, movieID: Int?) {
         self.service = service
         self.movieID = movieID
     }
