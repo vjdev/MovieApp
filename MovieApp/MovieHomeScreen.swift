@@ -36,6 +36,9 @@ struct MovieHomeScreen: View {
                     ForEach(results, id: \.self) { data in
                         MovieTileView(movieDetails: viewModel.getMovieDetails(data))
                             .frame(width: 200, height: 400)
+                            .onTapGesture {
+                                
+                            }
                     }
                 }
             }
