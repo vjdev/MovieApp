@@ -32,4 +32,20 @@ final class MovieDetailViewModel: ObservableObject {
                 self.movieDetails = movieDetails
             }.store(in: &cancellables)
     }
+    
+    func getRating() -> String {
+        if let rating = movieDetails?.voteAverage {
+            return String(rating)
+        }
+        return ""
+    }
+    
+    func getMoviePoster() -> URL? {
+        var fullPath = ""
+        if let backdropPath = movieDetails?.posterPath {
+            fullPath = ("https://image.tmdb.org/t/p/original/\(backdropPath)")
+        }
+        let url = URL(string: fullPath)
+        return url
+    }
 }

@@ -10,7 +10,6 @@ import Combine
 final class MovieService: MovieServiceProtocol {
     
     private var cancellables = Set<AnyCancellable>()
-    var moviePassthrough = PassthroughSubject<MovieTrending, APIErrors>()
     private let apiProvider = APIProvider<MovieServiceEndpoint>()
 
     func trendingMovies() -> AnyPublisher<MovieTrending?, APIErrors> {
@@ -28,6 +27,9 @@ final class MovieService: MovieServiceProtocol {
     
     func getMovieDetails(movieID: Int?) -> AnyPublisher<MovieDetails?, APIErrors> {
         apiProvider.getData(from: .movieDetails(movieID: movieID))
+            .handleEvents(receiveOutput: { data in
+                print("Raw Data: \(String(data: data, encoding: .utf8) ?? "Invalid Data")")
+            })
             .tryMap { data -> MovieDetails? in
                 do {
                     return try JSONDecoder().decode(MovieDetails.self, from: data)

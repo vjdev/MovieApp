@@ -10,6 +10,7 @@ import Combine
 final class MovieHomeScreenViewModel: ObservableObject {
     private let service: MovieServiceProtocol
     private var cancellables = Set<AnyCancellable>()
+    @Published var selectedMovieID: Int?
     @Published private(set) var trendingMovies: MovieTrending?
     init(service: MovieServiceProtocol) {
         self.service = service

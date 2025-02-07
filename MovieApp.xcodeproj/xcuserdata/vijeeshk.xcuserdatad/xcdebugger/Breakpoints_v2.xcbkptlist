@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "14F42E6C-BFC5-40AA-8507-3A04B16BB3A2"
+            uuid = "B92BAD71-8D61-41FC-BD1C-82B9F48DF0D3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MovieApp/MovieSampleApp.swift"
+            filePath = "MovieApp/MovieDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10"
-            endingLineNumber = "10"
-            landmarkName = "MovieSampleApp"
-            landmarkType = "14">
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "rating"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

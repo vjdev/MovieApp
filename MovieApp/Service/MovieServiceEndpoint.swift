@@ -20,15 +20,21 @@ enum MovieServiceEndpoint: EndpointProtocol {
         case .trendingMovie:
             return "\(baseURL)/trending/movie/day"
         case .movieDetails(let movieID):
-            return "\(baseURL)/movie/\(movieID ?? 0)"
+            if let movieID = movieID {
+                let movieIDStringValue = String(movieID)
+                return "\(baseURL)/movie/\(movieIDStringValue)"
+            } else {
+                return "\(baseURL)/movie"
+            }
         }
     }
     
     var params: [String : String] {
         switch self {
-        case .trendingMovie, .movieDetails:
+        case .trendingMovie:
             return ["language": "en-US"]
-            
+        default:
+            return [:]
         }
     }
     

@@ -25,9 +25,14 @@ class APIProvider<Endpoint: EndpointProtocol> {
             return nil
         }
         
-        urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
-            return URLQueryItem(name: param.key, value: param.value)
-        })
+//        urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
+//            return URLQueryItem(name: param.key, value: param.value)
+//        })
+        if !endpoint.params.isEmpty {
+            urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
+                return URLQueryItem(name: param.key, value: param.value)
+            })
+        }
         
         guard let url = urlComponents.url else {
             return nil

@@ -13,29 +13,77 @@ struct MovieDetailView: View {
         _viewModel = StateObject(wrappedValue: MovieDetailViewModel(service: service, movieID: movieId))
     }
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                titleView
-                rating
+        ScrollView(.vertical) {
+            VStack {
+                VStack(alignment: .leading) {
+                    movieImage
+                    titleView
+                    rating
+                }
+                HStack {
+                    showMovieGenre()
+                    Spacer()
+                }
+                .padding(.bottom, 20)
+                descriptionView
             }
-            movieGenre
-            HStack() {
-                length
-                language
-                certificate
-                Spacer()
+            .padding(20)
+            .onAppear {
+                viewModel.getMovieDetails()
             }
-            .padding(.bottom, 20)
-            descriptionView
-            castSection
         }
-        .padding(20)
+    }
+    
+    @ViewBuilder
+    func showMovieGenre() -> some View {
+        if let genre = viewModel.movieDetails?.genres {
+            ForEach(genre, id: \.self) { genre in
+                Text(genre.name)
+                    .modifier(GenreViewModifier())
+            }
+        }
+        EmptyView()
+    }
+}
+
+struct GenreViewModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(height: 10)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 5)
+            .foregroundColor(.white)
+            .font(.caption2)
+            .background(Capsule().fill(Color.cyan))
     }
 }
 
 extension MovieDetailView {
+    var movieImage: some View {
+        AsyncImage(url: viewModel.getMoviePoster()) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+                    .frame(width: 200, height: 320)
+            case .success(let image):
+                image.resizable()
+                    .cornerRadius(20)
+                    .scaledToFill()
+                    .cornerRadius(20)
+                    .frame(maxWidth: .infinity)
+            case .failure:
+                Image(systemName: "photo")
+                    .resizable()
+                    .cornerRadius(20)
+                    .scaledToFit()
+                    .frame(width: 200, height: 320)
+            @unknown default:
+                EmptyView()
+            }
+        }
+    }
     var movieTitle: some View {
-        Text("Spiderman: No Way Home")
+         Text(viewModel.movieDetails?.title ?? "")
             .foregroundColor(.black)
             .font(.title)
             .lineLimit(0)
@@ -47,14 +95,16 @@ extension MovieDetailView {
     }
     
     var ratingVLabel: some View {
-        Text("9.1/10 IMDb")
+        Text("\(viewModel.getRating())/10 IMDb")
             .foregroundStyle(.gray)
             .font(.caption)
     }
     var rating: some View {
         HStack {
             starIcon
-            ratingVLabel
+            if viewModel.movieDetails?.voteAverage != nil {
+                ratingVLabel
+            }
         }
     }
     
@@ -95,15 +145,15 @@ extension MovieDetailView {
     }
     
     var length: some View {
-        DoubleDeckerDetailView(topTitle: "Length", bottomTitle: "2h 28min")
+        DoubleDeckerDetailView(topTitle: "Length", bottomTitle: "\(viewModel.movieDetails?.runtime ?? 0)")
     }
     
     var language: some View {
-        DoubleDeckerDetailView(topTitle: "Language", bottomTitle: "English")
+        DoubleDeckerDetailView(topTitle: "Language", bottomTitle: viewModel.movieDetails?.originalLanguage ?? "")
     }
     
     var certificate: some View {
-        DoubleDeckerDetailView(topTitle: "Rating", bottomTitle: "PG-13")
+        DoubleDeckerDetailView(topTitle: "Tagline", bottomTitle: viewModel.movieDetails?.tagline ?? "")
 
     }
     
@@ -112,7 +162,7 @@ extension MovieDetailView {
             Text("Description")
                 .font(.headline)
                 .padding(.bottom, 20)
-            Text("Peter Parker's secret identity is revealed to the entire world. Desperate for help, Peter turns to Doctor Strange to make the world forget that he is Spider-Man. The spell goes horribly wrong and shatters the multiverse, bringing in monstrous villains that could destroy the world.")
+            Text(viewModel.movieDetails?.overview ?? "")
                 .font(.body)
         }
     }
