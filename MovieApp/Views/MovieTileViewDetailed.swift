@@ -7,30 +7,62 @@
 
 import SwiftUI
 
+struct MovieTileDetails {
+    let movieImageString: URL?
+    let movieTitleString: String?
+    let rating: String
+
+}
 struct MovieTileViewDetailed: View {
+    init(movieTileDetails: MovieTileDetails) {
+        self.movieTileDetails = movieTileDetails
+    }
+    
+    let movieTileDetails: MovieTileDetails
     var body: some View {
         HStack {
             movieImage
             movieDetails
+            Spacer()
         }
+        .frame(width: 400)
     }
 }
 
-#Preview {
-    MovieTileViewDetailed()
-}
+//#Preview {
+//    MovieTileViewDetailed()
+//}
 
 extension MovieTileViewDetailed {
     var movieImage: some View {
-        Image("spiderman", bundle: .main)
-            .cornerRadius(20)
+        AsyncImage(url: movieTileDetails.movieImageString) { phase in
+            switch phase {
+            case .empty:
+                ProgressView()
+                    .frame(width: 200, height: 320)
+            case .success(let image):
+                image.resizable()
+                    .cornerRadius(20)
+                    .scaledToFit()
+                    .frame(width: 200, height: 320)
+                    .cornerRadius(20)
+            case .failure:
+                Image(systemName: "photo")
+                    .resizable()
+                    .cornerRadius(20)
+                    .scaledToFit()
+                    .frame(width: 200, height: 320)
+            @unknown default:
+                EmptyView()
+            }
+        }
     }
     
     var movieTitle: some View {
-        Text("Spiderman: No Way Home")
+        Text(movieTileDetails.movieTitleString ?? "")
             .foregroundColor(.black)
-            .font(.title)
-            .lineLimit(0)
+            .font(.title3)
+            .lineLimit(3)
     }
     
     var starIcon: some View {
@@ -38,15 +70,16 @@ extension MovieTileViewDetailed {
             .foregroundStyle(.yellow)
     }
     
-    var ratingVLabel: some View {
-        Text("9.1/10 IMDb")
+    var ratingLabel: some View {
+        Text("\(movieTileDetails.rating)/10 IMDb")
             .foregroundStyle(.gray)
             .font(.caption)
+        
     }
     var rating: some View {
         HStack {
             starIcon
-            ratingVLabel
+            ratingLabel
         }
     }
     
@@ -54,28 +87,8 @@ extension MovieTileViewDetailed {
         VStack(alignment: .leading) {
             movieTitle
             rating
-            genreView
-            runningTime
         }
     }
-    
-    var genreView: some View {
-        Text("Horror")
-            .frame(height: 10)
-            .padding(.horizontal, 5)
-            .padding(.vertical, 5)
-            .foregroundColor(.white)
-            .font(.caption2)
-            .background(Capsule().fill(Color.cyan))
-    }
-    
-    var runningTime: some View {
-        HStack {
-            timeIcon
-            timeLabel
-        }
-    }
-    
     var timeIcon: some View {
         Image(systemName: "clock.arrow.circlepath")
     }

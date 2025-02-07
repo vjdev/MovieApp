@@ -169,7 +169,7 @@ extension MovieDetailView {
     
     var castSection: some View {
         VStack(alignment: .leading) {
-            HeaderView()
+            HeaderView(headerTitle: "Upcoming Movies", buttonTitle: "See More")
             ScrollView(.horizontal) {
                 HStack(spacing: 20) {
                     castView

@@ -14,10 +14,9 @@ struct MovieHomeScreen: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack {
-                    HeaderView()
                     showHorizontalScrollingMovieTiles()
-                    HeaderView()
-                    MovieTileViewDetailed()
+                    HeaderView(headerTitle: "Upcoming", buttonTitle: "See More")
+                    showUpcomingMovies()
                     Spacer()
                 }
             }
@@ -29,6 +28,27 @@ struct MovieHomeScreen: View {
             }
             .onAppear {
                 viewModel.getTrendingMovie()
+                viewModel.getUpcomingMovies()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func showUpcomingMovies() -> some View {
+        if let results = viewModel.upcomingMovies?.results {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(results, id: \.id) { data in
+                        let posterPath = viewModel.getMoviePoster(data)
+                        let movieDetails = MovieTileDetails(movieImageString: posterPath,
+                                                            movieTitleString: data.title,
+                                                            rating: viewModel.getRating(data))
+                        MovieTileViewDetailed(movieTileDetails: movieDetails)
+                            .onTapGesture {
+                                selectedMovieID = data.id
+                            }
+                    }
+                }
             }
         }
     }

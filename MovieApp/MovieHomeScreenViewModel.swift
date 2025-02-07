@@ -12,6 +12,7 @@ final class MovieHomeScreenViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var selectedMovieID: Int?
     @Published private(set) var trendingMovies: MovieTrending?
+    @Published private(set) var upcomingMovies: UpcomingMovieDetailsModel?
     init(service: MovieServiceProtocol) {
         self.service = service
     }
@@ -31,7 +32,22 @@ final class MovieHomeScreenViewModel: ObservableObject {
             }.store(in: &cancellables)
     }
     
-    private func getMoviePoster(_ result: Result) -> URL? {
+    func getUpcomingMovies(_ page: String = "1") {
+        service.upComingMovies(page)
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    print("Finished")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            } receiveValue: { upcomingMovies in
+                self.upcomingMovies = upcomingMovies
+            }.store(in: &cancellables)
+    }
+    
+    func getMoviePoster(_ result: Result) -> URL? {
         var fullPath = ""
         if let backdropPath = result.posterPath {
             fullPath = ("https://image.tmdb.org/t/p/original/\(backdropPath)")
@@ -45,5 +61,12 @@ final class MovieHomeScreenViewModel: ObservableObject {
                                            movieTitle: result.title ?? "",
                                            movieRating: "\(result.voteAverage ?? 0)/10 IMDb")
         return details
+    }
+    
+    func getRating(_ data: Result?) -> String {
+        if let rating = data?.voteAverage {
+            return String(rating)
+        }
+        return ""
     }
 }

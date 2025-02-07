@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct HeaderView: View {
+    var headerTitle: String
+    var buttonTitle: String
     var body: some View {
         HStack {
             title
             Spacer()
             seeMoreButton
+            Spacer()
         }
         .padding(20
         )
@@ -21,14 +24,16 @@ struct HeaderView: View {
 
 extension HeaderView {
     var title: some View {
-        Text("Popular")
+        Text(headerTitle)
+            .font(.largeTitle)
+            .fontWeight(.bold)
     }
     
     var seeMoreButton: some View {
         Button {
             
         } label: {
-            Text("See more")
+            Text(buttonTitle)
                 .foregroundColor(.white)
                 .frame(width: 80, height: 15)
                 .padding(.horizontal, 5)
@@ -39,5 +44,5 @@ extension HeaderView {
     }
 }
 #Preview {
-    HeaderView()
+    HeaderView(headerTitle: "Upcoming", buttonTitle: "See More")
 }
