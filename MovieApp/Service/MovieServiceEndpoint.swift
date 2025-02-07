@@ -11,6 +11,7 @@ import Foundation
 enum MovieServiceEndpoint: EndpointProtocol {
     case trendingMovie
     case movieDetails(movieID: Int?)
+    case upcoming(page:String = "1")
     var baseURL: String {
         return "https://api.themoviedb.org/3"
     }
@@ -26,6 +27,8 @@ enum MovieServiceEndpoint: EndpointProtocol {
             } else {
                 return "\(baseURL)/movie"
             }
+        case .upcoming:
+            return "\(baseURL)/movie/upcoming"
         }
     }
     
@@ -33,6 +36,8 @@ enum MovieServiceEndpoint: EndpointProtocol {
         switch self {
         case .trendingMovie:
             return ["language": "en-US"]
+        case .upcoming(let page):
+            return ["page": page]
         default:
             return [:]
         }
