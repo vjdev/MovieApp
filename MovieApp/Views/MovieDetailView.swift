@@ -144,19 +144,6 @@ extension MovieDetailView {
         }
     }
     
-    var length: some View {
-        DoubleDeckerDetailView(topTitle: "Length", bottomTitle: "\(viewModel.movieDetails?.runtime ?? 0)")
-    }
-    
-    var language: some View {
-        DoubleDeckerDetailView(topTitle: "Language", bottomTitle: viewModel.movieDetails?.originalLanguage ?? "")
-    }
-    
-    var certificate: some View {
-        DoubleDeckerDetailView(topTitle: "Tagline", bottomTitle: viewModel.movieDetails?.tagline ?? "")
-
-    }
-    
     var descriptionView: some View {
         VStack(alignment: .leading) {
             Text("Description")
