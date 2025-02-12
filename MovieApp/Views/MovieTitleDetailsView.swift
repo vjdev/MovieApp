@@ -65,11 +65,6 @@ extension MovieTitleDetailsView {
             .lineLimit(3)
     }
     
-    var starIcon: some View {
-        Image(systemName: "star.fill")
-            .foregroundStyle(.yellow)
-    }
-    
     var ratingLabel: some View {
         Text("\(movieTileDetails.rating)/10 IMDb")
             .foregroundStyle(.gray)
@@ -78,7 +73,7 @@ extension MovieTitleDetailsView {
     }
     var rating: some View {
         HStack {
-            starIcon
+            StarIconView()
             ratingLabel
         }
     }

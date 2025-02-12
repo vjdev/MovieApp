@@ -88,33 +88,20 @@ extension MovieDetailView {
             .font(.title)
             .lineLimit(0)
     }
-    
-    var starIcon: some View {
-        Image(systemName: "star.fill")
-            .foregroundStyle(.yellow)
-    }
-    
-    var ratingVLabel: some View {
-        Text("\(viewModel.getRating())/10 IMDb")
-            .foregroundStyle(.gray)
-            .font(.caption)
-    }
     var rating: some View {
         HStack {
-            starIcon
+            StarIconView()
             if viewModel.movieDetails?.voteAverage != nil {
-                ratingVLabel
+                RatingView(rating: viewModel.getRating())
             }
         }
     }
     
     var wishListButton: some View {
         Button {
-            
         } label: {
             Image(systemName: "bookmark")
         }
-
     }
     
     var titleView: some View {

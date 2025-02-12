@@ -66,12 +66,7 @@ extension MovieTileView {
             .lineLimit(2)
             .padding(.trailing, 2)
     }
-    
-    var starIcon: some View {
-        Image(systemName: "star.fill")
-            .foregroundStyle(.yellow)
-    }
-    
+        
     var ratingLabel: some View {
         Text(movieDetails.movieRating)
             .foregroundStyle(.gray)
@@ -79,8 +74,8 @@ extension MovieTileView {
     }
     var rating: some View {
         HStack {
-            starIcon
-            ratingLabel
+            StarIconView()
+            RatingView(rating: movieDetails.movieRating)
         }
     }
 }
