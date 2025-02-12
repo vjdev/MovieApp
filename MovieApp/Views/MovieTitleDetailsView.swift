@@ -13,7 +13,7 @@ struct MovieTileDetails {
     let rating: String
 
 }
-struct MovieTileViewDetailed: View {
+struct MovieTitleDetailsView: View {
     init(movieTileDetails: MovieTileDetails) {
         self.movieTileDetails = movieTileDetails
     }
@@ -33,7 +33,7 @@ struct MovieTileViewDetailed: View {
 //    MovieTileViewDetailed()
 //}
 
-extension MovieTileViewDetailed {
+extension MovieTitleDetailsView {
     var movieImage: some View {
         AsyncImage(url: movieTileDetails.movieImageString) { phase in
             switch phase {
