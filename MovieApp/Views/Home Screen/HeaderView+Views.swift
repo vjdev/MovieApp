@@ -19,12 +19,18 @@ extension HeaderView {
             
         } label: {
             Text(buttonTitle)
-                .foregroundColor(.white)
-                .frame(width: 80, height: 15)
-                .padding(.horizontal, 5)
-                .padding(.vertical, 5)
-                .background(Capsule().fill(.gray))
-                
+                .modifier(HeaderTitleModifier())
         }
+    }
+}
+
+struct HeaderTitleModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.white)
+            .frame(width: 80, height: 15)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 5)
+            .background(Capsule().fill(.gray))
     }
 }
