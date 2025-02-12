@@ -1,26 +1,11 @@
 //
-//  HeaderView.swift
-//  MovieSample
+//  HeaderView+Views.swift
+//  MovieApp
 //
-//  Created by vijeesh k on 28/01/25.
+//  Created by vijeesh k on 12/02/25.
 //
 
 import SwiftUI
-
-struct HeaderView: View {
-    var headerTitle: String
-    var buttonTitle: String
-    var body: some View {
-        HStack {
-            title
-            Spacer()
-            seeMoreButton
-            Spacer()
-        }
-        .padding(20
-        )
-    }
-}
 
 extension HeaderView {
     var title: some View {
@@ -42,7 +27,4 @@ extension HeaderView {
                 
         }
     }
-}
-#Preview {
-    HeaderView(headerTitle: "Upcoming", buttonTitle: "See More")
 }
