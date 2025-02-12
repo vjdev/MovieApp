@@ -153,41 +153,6 @@ extension MovieDetailView {
                 .font(.body)
         }
     }
-    
-    var castSection: some View {
-        VStack(alignment: .leading) {
-            HeaderView(headerTitle: "Upcoming Movies", buttonTitle: "See More")
-            ScrollView(.horizontal) {
-                HStack(spacing: 20) {
-                    castView
-                    castView
-                    castView
-                    castView
-                    castView
-                    castView
-                }
-            }
-        }
-    }
-    
-    var castView: some View {
-        VStack(alignment: .leading) {
-            actorName
-            actorImage
-        }
-        .frame(width: 120, height: 150)
-        
-    }
-    
-    var actorName: some View {
-        Text("Tom Holland")
-    }
-    
-    var actorImage: some View {
-        Image("spiderman", bundle: .main)
-            .resizable()
-            .cornerRadius(10)
-    }
 }
 
 //#Preview {

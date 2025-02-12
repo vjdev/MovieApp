@@ -43,7 +43,7 @@ struct MovieHomeScreen: View {
                         let movieDetails = MovieTileDetails(movieImageString: posterPath,
                                                             movieTitleString: data.title,
                                                             rating: viewModel.getRating(data))
-                        MovieTileViewDetailed(movieTileDetails: movieDetails)
+                        MovieTitleDetailsView(movieTileDetails: movieDetails)
                             .onTapGesture {
                                 selectedMovieID = data.id
                             }
