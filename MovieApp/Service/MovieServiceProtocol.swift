@@ -1,8 +1,8 @@
 //
 //  MovieServiceProtocol.swift
-//  MovieApp
+//  MovieSample
 //
-//  Created by vijeesh k on 03/02/25.
+//  Created by vijeesh k on 28/01/25.
 //
 
 import Foundation

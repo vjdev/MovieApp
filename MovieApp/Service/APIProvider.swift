@@ -1,9 +1,8 @@
 //
 //  APIProvider.swift
-//  SwiftUI Demo
+//  MovieSample
 //
-//  Created by Алексей Воронов on 15.06.2019.
-//  Copyright © 2019 Алексей Воронов. All rights reserved.
+//  Created by vijeesh k on 28/01/25.
 //
 
 import Foundation
@@ -24,10 +23,6 @@ class APIProvider<Endpoint: EndpointProtocol> {
         guard var urlComponents = URLComponents(string: endpoint.absoluteURL) else {
             return nil
         }
-        
-//        urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
-//            return URLQueryItem(name: param.key, value: param.value)
-//        })
         if !endpoint.params.isEmpty {
             urlComponents.queryItems = endpoint.params.compactMap({ param -> URLQueryItem in
                 return URLQueryItem(name: param.key, value: param.value)

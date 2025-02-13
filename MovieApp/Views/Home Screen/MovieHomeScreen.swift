@@ -9,27 +9,22 @@ import SwiftUI
 
 struct MovieHomeScreen: View {
     @StateObject private var viewModel: MovieHomeScreenViewModel = MovieHomeScreenViewModel(service: MovieService())
-    @State private var selectedMovieID: Int?
+    @EnvironmentObject var router: Router
     var body: some View {
-        NavigationStack {
-            ScrollView(.vertical) {
-                VStack {
-                    showHorizontalScrollingMovieTiles()
-                    HeaderView(headerTitle: Constants.upcoming, buttonTitle: Constants.seeMore)
-                    showUpcomingMovies()
-                    Spacer()
-                }
+        ScrollView(.vertical) {
+            VStack {
+                showHorizontalScrollingMovieTiles()
+                HeaderView(headerTitle: Constants.upcoming, buttonTitle: Constants.seeMore)
+                showUpcomingMovies()
+                Spacer()
             }
-            .padding()
-            .navigationTitle(Constants.nowShowing)
-            .navigationBarTitleDisplayMode(.large)
-            .navigationDestination(item: $selectedMovieID) { id in
-                MovieDetailView(movieId: id)
-            }
-            .onAppear {
-                viewModel.getTrendingMovie()
-                viewModel.getUpcomingMovies()
-            }
+        }
+        .padding()
+        .navigationTitle(Constants.nowShowing)
+        .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            viewModel.getTrendingMovie()
+            viewModel.getUpcomingMovies()
         }
     }
     
@@ -45,7 +40,9 @@ struct MovieHomeScreen: View {
                                                             rating: viewModel.getRating(data))
                         MovieTitleDetailsView(movieTileDetails: movieDetails)
                             .onTapGesture {
-                                selectedMovieID = data.id
+                                if let movieId = data.id {
+                                    router.push(.detailScreen(movieId: movieId))
+                                }
                             }
                     }
                 }
@@ -62,7 +59,9 @@ struct MovieHomeScreen: View {
                         MovieTileView(movieDetails: viewModel.getMovieDetails(data))
                             .frame(width: 200, height: 400)
                             .onTapGesture {
-                                selectedMovieID = data.id
+                                if let movieId = data.id {
+                                    router.push(.detailScreen(movieId: movieId))
+                                }
                             }
                     }
                 }
