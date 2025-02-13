@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct MovieAppApp: App {
-    @StateObject private var router = Router()
-
-     var body: some Scene {
-         WindowGroup {
-             CoordinatorView()
-                 .environmentObject(router)
-         }
-     }
+    var body: some Scene {
+        WindowGroup {
+            MovieHomeScreen()
+        }
+    }
 }

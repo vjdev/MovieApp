@@ -1,8 +1,9 @@
 //
 //  APIProviderErrors.swift
-//  MovieSample
+//  NewsApp With SwiftUI Framework
 //
-//  Created by vijeesh k on 28/01/25.
+//  Created by Алексей Воронов on 17.06.2019.
+//  Copyright © 2019 Алексей Воронов. All rights reserved.
 //
 
 import Foundation
