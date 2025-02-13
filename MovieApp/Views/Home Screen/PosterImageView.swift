@@ -18,19 +18,19 @@ struct PosterImageView: View {
                 switch phase {
                 case .empty:
                     ProgressView()
-                        .frame(width: 200, height: 320)
+                        .frame(width: Constants_UI.movieImageWidth, height: Constants_UI.movieImageHeight)
                 case .success(let image):
                     image.resizable()
-                        .cornerRadius(20)
+                        .cornerRadius(Constants_UI.cornerRadius)
                         .scaledToFill()
-                        .cornerRadius(20)
-                        .frame(maxWidth: .infinity)
+//                        .frame(maxWidth: .infinity)
+                        .frame(width: Constants_UI.movieImageWidth, height: Constants_UI.movieImageHeight)
                 case .failure:
                     Image(systemName: "unAvailable")
                         .resizable()
-                        .cornerRadius(20)
+                        .cornerRadius(Constants_UI.cornerRadius)
                         .scaledToFit()
-                        .frame(width: 200, height: 320)
+                        .frame(width: Constants_UI.movieImageWidth, height: Constants_UI.movieImageHeight)
                 @unknown default:
                     EmptyView()
                 }

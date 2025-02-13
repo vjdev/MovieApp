@@ -57,7 +57,7 @@ struct MovieHomeScreen: View {
     func showHorizontalScrollingMovieTiles() -> some View {
         if let results = viewModel.trendingMovies?.results {
             ScrollView(.horizontal) {
-                HStack {
+                HStack(spacing: Constants_UI.Padding.xxLarge) {
                     ForEach(results, id: \.self) { data in
                         MovieTileView(movieDetails: viewModel.getMovieDetails(data))
                             .frame(width: 200, height: 400)
@@ -70,9 +70,6 @@ struct MovieHomeScreen: View {
         }
     }
 }
-
-
-
 #Preview {
     MovieHomeScreen()
 }
