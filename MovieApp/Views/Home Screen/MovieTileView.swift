@@ -21,8 +21,8 @@ struct MovieTileView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            movieImage
+        VStack(alignment: .leading, spacing: Constants_UI.Padding.min) {
+            PosterImageView(movieDetails.movieImageURL)
             movieTitle
             rating
         }
@@ -34,37 +34,13 @@ struct MovieTileView: View {
 }
 
 extension MovieTileView {
-    var movieImage: some View {
-        AsyncImage(url: movieDetails.movieImageURL) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-                    .frame(width: 200, height: 320)
-            case .success(let image):
-                image.resizable()
-                    .cornerRadius(20)
-                    .scaledToFit()
-                    .frame(width: 200, height: 320)
-                    .cornerRadius(20)
-            case .failure:
-                Image(systemName: "photo")
-                    .resizable()
-                    .cornerRadius(20)
-                    .scaledToFit()
-                    .frame(width: 200, height: 320)
-            @unknown default:
-                EmptyView()
-            }
-        }
-    }
-    
     var movieTitle: some View {
         Text(movieDetails.movieTitle)
             .multilineTextAlignment(.leading)
             .foregroundColor(.black)
             .font(.title3)
             .lineLimit(2)
-            .padding(.trailing, 2)
+            .padding(.trailing, Constants_UI.Padding.min)
     }
         
     var ratingLabel: some View {
@@ -77,5 +53,17 @@ extension MovieTileView {
             StarIconView()
             RatingView(rating: movieDetails.movieRating)
         }
+    }
+}
+
+struct Constants_UI {
+    static let cornerRadius: CGFloat = 20
+    static let movieImageHeight: CGFloat = 320
+    static let movieImageWidth: CGFloat = 200
+    static let unAvailableImage: String = "unAvailable"
+    struct Padding {
+        static let min: CGFloat = 2
+        static let medium: CGFloat = 5
+        static let xLarge: CGFloat = 20
     }
 }

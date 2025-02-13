@@ -15,13 +15,13 @@ struct MovieHomeScreen: View {
             ScrollView(.vertical) {
                 VStack {
                     showHorizontalScrollingMovieTiles()
-                    HeaderView(headerTitle: "Upcoming", buttonTitle: "See More")
+                    HeaderView(headerTitle: Constants.upcoming, buttonTitle: Constants.seeMore)
                     showUpcomingMovies()
                     Spacer()
                 }
             }
             .padding()
-            .navigationTitle("Now Showing")
+            .navigationTitle(Constants.nowShowing)
             .navigationBarTitleDisplayMode(.large)
             .navigationDestination(item: $selectedMovieID) { id in
                 MovieDetailView(movieId: id)

@@ -21,7 +21,7 @@ struct MovieTitleDetailsView: View {
     let movieTileDetails: MovieTileDetails
     var body: some View {
         HStack {
-            movieImage
+            PosterImageView(movieTileDetails.movieImageString)
             movieDetails
             Spacer()
         }
@@ -33,31 +33,7 @@ struct MovieTitleDetailsView: View {
 //    MovieTileViewDetailed()
 //}
 
-extension MovieTitleDetailsView {
-    var movieImage: some View {
-        AsyncImage(url: movieTileDetails.movieImageString) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-                    .frame(width: 200, height: 320)
-            case .success(let image):
-                image.resizable()
-                    .cornerRadius(20)
-                    .scaledToFit()
-                    .frame(width: 200, height: 320)
-                    .cornerRadius(20)
-            case .failure:
-                Image(systemName: "photo")
-                    .resizable()
-                    .cornerRadius(20)
-                    .scaledToFit()
-                    .frame(width: 200, height: 320)
-            @unknown default:
-                EmptyView()
-            }
-        }
-    }
-    
+extension MovieTitleDetailsView {    
     var movieTitle: some View {
         Text(movieTileDetails.movieTitleString ?? "")
             .foregroundColor(.black)
@@ -66,7 +42,7 @@ extension MovieTitleDetailsView {
     }
     
     var ratingLabel: some View {
-        Text("\(movieTileDetails.rating)/10 IMDb")
+        Text("\(movieTileDetails.rating)/\(Constants.imdb)")
             .foregroundStyle(.gray)
             .font(.caption)
         

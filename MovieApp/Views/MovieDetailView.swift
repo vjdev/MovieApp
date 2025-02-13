@@ -16,7 +16,7 @@ struct MovieDetailView: View {
         ScrollView(.vertical) {
             VStack {
                 VStack(alignment: .leading) {
-                    movieImage
+                    PosterImageView(viewModel.getMoviePoster())
                     titleView
                     rating
                 }
@@ -24,10 +24,10 @@ struct MovieDetailView: View {
                     showMovieGenre()
                     Spacer()
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, Constants_UI.Padding.xLarge)
                 descriptionView
             }
-            .padding(20)
+            .padding(Constants_UI.Padding.xLarge)
             .onAppear {
                 viewModel.getMovieDetails()
             }
@@ -50,8 +50,8 @@ struct GenreViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(height: 10)
-            .padding(.horizontal, 5)
-            .padding(.vertical, 5)
+            .padding(.horizontal, Constants_UI.Padding.medium)
+            .padding(.vertical, Constants_UI.Padding.medium)
             .foregroundColor(.white)
             .font(.caption2)
             .background(Capsule().fill(Color.cyan))
@@ -59,29 +59,6 @@ struct GenreViewModifier: ViewModifier {
 }
 
 extension MovieDetailView {
-    var movieImage: some View {
-        AsyncImage(url: viewModel.getMoviePoster()) { phase in
-            switch phase {
-            case .empty:
-                ProgressView()
-                    .frame(width: 200, height: 320)
-            case .success(let image):
-                image.resizable()
-                    .cornerRadius(20)
-                    .scaledToFill()
-                    .cornerRadius(20)
-                    .frame(maxWidth: .infinity)
-            case .failure:
-                Image(systemName: "photo")
-                    .resizable()
-                    .cornerRadius(20)
-                    .scaledToFit()
-                    .frame(width: 200, height: 320)
-            @unknown default:
-                EmptyView()
-            }
-        }
-    }
     var movieTitle: some View {
          Text(viewModel.movieDetails?.title ?? "")
             .foregroundColor(.black)
@@ -115,8 +92,8 @@ extension MovieDetailView {
     var genreView: some View {
         Text("Horror")
             .frame(height: 10)
-            .padding(.horizontal, 5)
-            .padding(.vertical, 5)
+            .padding(.horizontal, Constants_UI.Padding.medium)
+            .padding(.vertical, Constants_UI.Padding.medium)
             .foregroundColor(.white)
             .font(.caption2)
             .background(Capsule().fill(Color.cyan))
@@ -133,9 +110,9 @@ extension MovieDetailView {
     
     var descriptionView: some View {
         VStack(alignment: .leading) {
-            Text("Description")
+            Text(Constants.description)
                 .font(.headline)
-                .padding(.bottom, 20)
+                .padding(.bottom, Constants_UI.Padding.xLarge)
             Text(viewModel.movieDetails?.overview ?? "")
                 .font(.body)
         }
@@ -145,3 +122,12 @@ extension MovieDetailView {
 //#Preview {
 //    MovieDetailView()
 //}
+
+struct Constants {
+    static let upcoming = "Upcoming"
+    static let seeMore = "See More"
+    static let nowShowing = "Now Showing"
+    static let description = "Description"
+    static let imdb = "10 IMDb"
+    
+}

@@ -17,8 +17,7 @@ struct HeaderView: View {
             seeMoreButton
             Spacer()
         }
-        .padding(20
-        )
+        .padding(Constants_UI.Padding.xLarge)
     }
 }
 

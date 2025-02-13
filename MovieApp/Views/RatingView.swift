@@ -10,7 +10,7 @@ import SwiftUI
 struct RatingView: View {
     var rating: String
     var body: some View {
-        Text("\(rating)/10 IMDb")
+        Text("\(rating)/\(Constants.imdb)")
             .foregroundStyle(.gray)
             .font(.caption)
     }

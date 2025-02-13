@@ -29,8 +29,8 @@ struct HeaderTitleModifier: ViewModifier {
         content
             .foregroundColor(.white)
             .frame(width: 80, height: 15)
-            .padding(.horizontal, 5)
-            .padding(.vertical, 5)
+            .padding(.horizontal, Constants_UI.Padding.medium)
+            .padding(.vertical, Constants_UI.Padding.medium)
             .background(Capsule().fill(.gray))
     }
 }
